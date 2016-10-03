@@ -16,12 +16,12 @@ function MostrarGrilla(){
         async: true
     })
 	.then(function bien(grilla) {
-		alert("BIEN!!!");
+		console.info(grilla);
 		$("#divGrilla").html(grilla);
 	},
 	function mal(error) {
         alert("MAL: "+error);
-        console.info(alert(error.responseText + "\n" + textStatus + "\n" + errorThrown));
+        console.info(error.responseText + "\n" + textStatus + "\n" + errorThrown);
     });   
 }
 
@@ -50,17 +50,16 @@ function SubirFoto(){
         data: formData,
         async: true
     })
-	.then(function (objJson) {
-
-		if(!objJson.Exito){
-			alert(objJson.Mensaje);
-			return;
-		}
+	.then(function bien(objJson) {
+		console.info(objJson);
+		// if(!objJson.Exito){
+		// 	alert(objJson.Mensaje);
+		// 	return;
+		// }
 		$("#divFoto").html(objJson.Html);
 	},
 	function mal(error) {
-        alert("MAL: "+error);
-        console.info(alert(error.responseText + "\n" + textStatus + "\n" + errorThrown));
+        console.info(error.responseText + "\n" + textStatus + "\n" + errorThrown);
     }); 
 }
 
@@ -103,7 +102,7 @@ function BorrarFoto(){
 	return;
 }
 
-function AgregarProducto(){
+function AgregarMascota(){
 	
     var pagina = "./nexoadministrador.php";
 	var nombre = $("#nombre").val();
@@ -118,7 +117,7 @@ function AgregarProducto(){
 	mascota.nombre = nombre;
 	mascota.edad = edad;
 	mascota.fechaDeNacimiento = fechaDeNacimiento;
-	prodcuto.mascota = mascota;
+	mascota.mascota = mascota;
 
 	if(!Validar(mascota)){
 		alert("Debe completar TODOS los campos!!!");

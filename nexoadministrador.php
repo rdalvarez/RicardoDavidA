@@ -24,14 +24,16 @@ switch($queHago){
 
 		foreach ($ArrayDeMascotas as $masc){
 			$mascota = array();
-			$mascota["codBarra"] = $masc->GetCodBarra();
 			$mascota["nombre"] = $masc->GetNombre();
+			$mascota["edad"] = $masc->GetEdad();
 
 			$mascota = json_encode($mascota);
 		
 			$grilla .= "<tr>
-							<td>".$masc->GetCodBarra()."</td>
 							<td>".$masc->GetNombre()."</td>
+							<td>".$masc->GetEdad()."</td>
+							<td>".$masc->GetFechaDeNacimiento()."</td>
+							<td>".$masc->GetMascota()."</td>
 							<td><img src='archivos/".$masc->GetPathFoto()."' width='100px' height='100px'/></td>
 							<td><input type='button' value='Eliminar' class='MiBotonUTN' id='btnEliminar' onclick='EliminarProducto($mascota)' />
 								<input type='button' value='Modificar' class='MiBotonUTN' id='btnModificar' onclick='ModificarProducto($mascota)' /></td>
@@ -64,17 +66,18 @@ switch($queHago){
 		
 	case "agregar":
 		$retorno["Exito"] = TRUE;
+
 		$retorno["Mensaje"] = "";
-		$obj = isset($_POST['producto']) ? json_decode(json_encode($_POST['producto'])) : NULL;
+		$obj = isset($_POST['mascota']) ? json_decode(json_encode($_POST['mascota'])) : NULL;
 		
-		$p = new Producto($obj->codBarra,$obj->nombre,$obj->archivo);
+		$p = new Producto($obj->nombre,$obj->edad,$obj->fechaDeNacimiento,$obj->mascota);
 		
 		if(!Producto::Guardar($p)){
 			$retorno["Exito"] = FALSE;
 			$retorno["Mensaje"] = "Lamentablemente ocurrio un error y no se pudo escribir en el archivo.";
 		}
 		else{
-			if(!Archivo::Mover("./tmp/".$obj->archivo, "./archivos/".$obj->archivo)){
+			if(!Archivo::Mover("./tmp/".$obj->archivo, "./DB/".$obj->archivo)){
 				$retorno["Exito"] = FALSE;
 				$retorno["Mensaje"] = "Lamentablemente ocurrio un error al mover el archivo del repositorio temporal al repositorio final.";
 			}
@@ -90,8 +93,7 @@ switch($queHago){
 	case "eliminar":
 		$retorno["Exito"] = TRUE;
 		$retorno["Mensaje"] = "";
-		$obj = isset($_POST['producto']) ? json_decode(json_encode($_POST['producto'])) : NULL;
-		
+		$obj = isset($_POST['mascota']) ? json_decode(json_encode($_POST['mascota'])) : NULL;
 		if(!Producto::Eliminar($obj->codBarra)){
 			$retorno["Exito"] = FALSE;
 			$retorno["Mensaje"] = "Lamentablemente ocurrio un error y no se pudo escribir en el archivo.";
@@ -107,7 +109,7 @@ switch($queHago){
 	case "modificar":
 		$retorno["Exito"] = TRUE;
 		$retorno["Mensaje"] = "";
-		$obj = isset($_POST['producto']) ? json_decode(json_encode($_POST['producto'])) : NULL;
+		$obj = isset($_POST['mascota']) ? json_decode(json_encode($_POST['mascota'])) : NULL;
 		
 		$p = new Producto($obj->codBarra,$obj->nombre,$obj->archivo);
 		

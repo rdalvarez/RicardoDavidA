@@ -8,7 +8,7 @@ class Mascota
  	private $edad;
   	private $fechaDeNacimiento;
   	private $mascota;
-  	private $sexo;
+  	private $pathFoto;
 
 //--------------------------------------------------------------------------------//
 
@@ -18,25 +18,25 @@ class Mascota
 	public function GetEdad(){ return $this->edad;}
 	public function GetFechaDeNacimiento(){return $this->$fechaDeNacimiento;}
 	public function GetMascota(){ return $this->mascota;}
-	public function GetSexo(){ return $this->sexo;}
+	public function GetPathFoto(){ return $this->pathFoto;}
 
 	public function SetNombre($valor){$this->nombre = $valor;}
 	public function SetEdad($valor){$this->edad = $valor;}
 	public function SetFechaDeNacimiento($valor){$this->$fechaDeNacimiento = $valor;}
 	public function SetMascota($valor){$this->mascota = $valor;}
-	public function SetSexo($valor){$this->sexo = $valor;}
+	public function SetPathFoto($valor){$this->pathFoto = $valor;}
 
 //--------------------------------------------------------------------------------//
 //--CONSTRUCTOR
-	public function __construct($nombre=NULL, $edad=NULL, $fechaDeNacimiento=NULL, $mascota=NULL, $sexo=NULL) //
+	public function __construct($nombre=NULL, $edad=NULL, $fechaDeNacimiento=NULL, $mascota=NULL, $pathFoto=NULL) //
 	{
-		$this->sexo = "M";
+		
 		if($nombre !== NULL && $edad !== NULL && $fechaDeNacimiento!==NULL){
 			$this->nombre = $nombre;
 			$this->edad = $edad;
 			$this->fechaDeNacimiento = $fechaDeNacimiento;
 			$this->mascota = $mascota;
-			
+			$this->pathFoto = $pathFoto;			
 		}
 	}
 
@@ -44,7 +44,7 @@ class Mascota
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota." - ".$this->sexo."\r\n"; //
+	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota." - ".$this->pathFoto."\r\n"; //
 	}
 //--------------------------------------------------------------------------------//
 
