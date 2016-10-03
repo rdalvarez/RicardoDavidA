@@ -8,7 +8,7 @@ switch($queHago){
 
 	case "mostrarGrilla":
 	
-		$ArrayDeMascotas = Mascota::TraerTodosLasMascotas();
+		$ArrayDeMascotas = Mascota::TraerTodasLasMascotas();
 
 		$grilla = '<table class="table">
 					<thead style="background:rgb(14, 26, 112);color:#fff;">
@@ -22,17 +22,17 @@ switch($queHago){
 						</tr> 
 					</thead>';   	
 
-		foreach ($ArrayDeMascotas as $prod){
+		foreach ($ArrayDeMascotas as $masc){
 			$mascota = array();
-			$mascota["codBarra"] = $prod->GetCodBarra();
-			$mascota["nombre"] = $prod->GetNombre();
+			$mascota["codBarra"] = $masc->GetCodBarra();
+			$mascota["nombre"] = $masc->GetNombre();
 
 			$mascota = json_encode($mascota);
 		
 			$grilla .= "<tr>
-							<td>".$prod->GetCodBarra()."</td>
-							<td>".$prod->GetNombre()."</td>
-							<td><img src='archivos/".$prod->GetPathFoto()."' width='100px' height='100px'/></td>
+							<td>".$masc->GetCodBarra()."</td>
+							<td>".$masc->GetNombre()."</td>
+							<td><img src='archivos/".$masc->GetPathFoto()."' width='100px' height='100px'/></td>
 							<td><input type='button' value='Eliminar' class='MiBotonUTN' id='btnEliminar' onclick='EliminarProducto($mascota)' />
 								<input type='button' value='Modificar' class='MiBotonUTN' id='btnModificar' onclick='ModificarProducto($mascota)' /></td>
 						</tr>";

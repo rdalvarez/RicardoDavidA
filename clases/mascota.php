@@ -44,7 +44,7 @@ class Mascota
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota.." - ".$this->sexo"\r\n"; //
+	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota." - ".$this->sexo."\r\n"; //
 	}
 //--------------------------------------------------------------------------------//
 
@@ -72,24 +72,24 @@ class Mascota
 	public static function TraerTodasLasMascotas()
 	{
 
-		$ListaDeMascotasLeidas = array();
+		$ListaDeMascotasLeidos = array();
 
 		//leo todos los productos del archivo
-		$archivo=fopen("DB/mascotas.txt", "r");
+		$archivo=fopen("archivos/productos.txt", "r");
 		
 		while(!feof($archivo))
 		{
 			$archAux = fgets($archivo);
-			$productos = explode(" - ", $archAux);
+			$mascotas = explode(" - ", $archAux);
 			//http://www.w3schools.com/php/func_string_explode.asp
 			$mascotas[0] = trim($mascotas[0]);
 			if($mascotas[0] != ""){
-				$ListaDeMascotasLeidas[] = new Producto($mascotas[0], $mascotas[1],$mascotas[2]);
+				$ListaDeMascotasLeidos[] = new Producto($mascotas[0], $mascotas[1],$mascotas[2]);
 			}
 		}
 		fclose($archivo);
 		
-		return $ListaDeMascotasLeidas;
+		return $ListaDeMascotasLeidos;
 		
 	}
 	public static function Modificar($obj)
