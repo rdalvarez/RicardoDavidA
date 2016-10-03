@@ -28,14 +28,15 @@ class Mascota
 
 //--------------------------------------------------------------------------------//
 //--CONSTRUCTOR
-	public function __construct($nombre=NULL, $Edad=NULL, $fechaDeNacimiento=NULL, $mascota=NULL, $sexo=NULL)
+	public function __construct($nombre=NULL, $edad=NULL, $fechaDeNacimiento=NULL, $mascota=NULL, $sexo=NULL) //
 	{
+		$this->sexo = "M";
 		if($nombre !== NULL && $edad !== NULL && $fechaDeNacimiento!==NULL){
 			$this->nombre = $nombre;
 			$this->edad = $edad;
 			$this->fechaDeNacimiento = $fechaDeNacimiento;
 			$this->mascota = $mascota;
-			$this->sexo = $sexo;
+			
 		}
 	}
 
@@ -43,7 +44,7 @@ class Mascota
 //--TOSTRING	
   	public function ToString()
 	{
-	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota." - ".$this->sexo."\r\n";
+	  	return $this->nombre." - ".$this->edad." - ".$this->fechaDeNacimiento." - ".$this->mascota.." - ".$this->sexo"\r\n"; //
 	}
 //--------------------------------------------------------------------------------//
 

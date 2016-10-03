@@ -3,11 +3,11 @@
 	<title>RDA </title>
 	  
 		<!-- jQuery library -->
-        <script src="JS/jquety.js"></script>
+        <script src="JS/jquery.js"></script>
 		<script type="text/javascript" src="./JS/FuncionesParcial.js"></script>
 		
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="estilo.css">
+        <link rel="stylesheet" type="text/css" href="CSS/estilo.css">
 </head>
 <body>
 	<div class="container">
@@ -21,8 +21,14 @@
 					<tr>
 						<td width="50%">
 							<div id="divFrm" style="height:250px;overflow:auto;margin-top:20px">
-								<input type="text" name="codBarra" id="codBarra" placeholder="Ingrese c&oacute;digo de barras" />
-								<input type="text" name="nombre" id="nombre" placeholder="Ingrese nombre" />
+								<input type="text" name="nombre" id="nombre" placeholder="Ingrese Nombre" />
+								<input type="text" name="edad" id="edad" placeholder="Ingrese Edad" />
+								<input type="text" name="fechaDeNacimiento" id="fechaDeNacimiento" placeholder="Ingrese Fecha de Nac." />
+								<select name="Color">
+									 <option value="gato">gato</option>
+									 <option value="perro">perro</option>
+								</select>
+
 								<input type="file" name="archivo" id="archivo" onchange="SubirFoto()" /> 
 								
 								<input type="button" class="MiBotonUTN" onclick="AgregarProducto()" value="Guardar"  />
