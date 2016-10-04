@@ -7,7 +7,7 @@ $queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;
 switch($queHago){
 
 	case "mostrarGrilla":
-	
+
 		$ArrayDeMascotas = Mascota::TraerTodasLasMascotas();
 
 		$grilla = '<table class="table">
@@ -26,6 +26,8 @@ switch($queHago){
 			$mascota = array();
 			$mascota["nombre"] = $masc->GetNombre();
 			$mascota["edad"] = $masc->GetEdad();
+			$mascota["fechaDeNacimiento"] = $masc->GetFechaDeNacimiento;
+			$mascota["mascota"] = $masc->GetMascota();
 
 			$mascota = json_encode($mascota);
 		
@@ -35,8 +37,8 @@ switch($queHago){
 							<td>".$masc->GetFechaDeNacimiento()."</td>
 							<td>".$masc->GetMascota()."</td>
 							<td><img src='archivos/".$masc->GetPathFoto()."' width='100px' height='100px'/></td>
-							<td><input type='button' value='Eliminar' class='MiBotonUTN' id='btnEliminar' onclick='EliminarProducto($mascota)' />
-								<input type='button' value='Modificar' class='MiBotonUTN' id='btnModificar' onclick='ModificarProducto($mascota)' /></td>
+							<td><input type='button' value='Eliminar' class='MiBotonUTN' id='btnEliminar' onclick='EliminarMascota($mascota)' />
+								<input type='button' value='Modificar' class='MiBotonUTN' id='btnModificar' onclick='ModificarMascota($mascota)' /></td>
 						</tr>";
 		}
 		
@@ -70,14 +72,14 @@ switch($queHago){
 		$retorno["Mensaje"] = "";
 		$obj = isset($_POST['mascota']) ? json_decode(json_encode($_POST['mascota'])) : NULL;
 		
-		$p = new Producto($obj->nombre,$obj->edad,$obj->fechaDeNacimiento,$obj->mascota);
+		$p = new Mascota($obj->nombre,$obj->edad,$obj->fechaDeNacimiento,$obj->mascota,$obj->archivo);
 		
-		if(!Producto::Guardar($p)){
+		if(!Mascota::Guardar($p)){
 			$retorno["Exito"] = FALSE;
 			$retorno["Mensaje"] = "Lamentablemente ocurrio un error y no se pudo escribir en el archivo.";
 		}
 		else{
-			if(!Archivo::Mover("./tmp/".$obj->archivo, "./DB/".$obj->archivo)){
+			if(!Mascota::Mover("./tmp/".$obj->archivo, "./DB/".$obj->archivo)){
 				$retorno["Exito"] = FALSE;
 				$retorno["Mensaje"] = "Lamentablemente ocurrio un error al mover el archivo del repositorio temporal al repositorio final.";
 			}

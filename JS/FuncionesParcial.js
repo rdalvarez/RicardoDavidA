@@ -16,7 +16,6 @@ function MostrarGrilla(){
         async: true
     })
 	.then(function bien(grilla) {
-		console.info(grilla);
 		$("#divGrilla").html(grilla);
 	},
 	function mal(error) {
@@ -51,7 +50,7 @@ function SubirFoto(){
         async: true
     })
 	.then(function bien(objJson) {
-		console.info(objJson);
+		console.info("BIEN: "+objJson.Mensaje);
 		// if(!objJson.Exito){
 		// 	alert(objJson.Mensaje);
 		// 	return;
@@ -59,7 +58,7 @@ function SubirFoto(){
 		$("#divFoto").html(objJson.Html);
 	},
 	function mal(error) {
-        console.info(error.responseText + "\n" + textStatus + "\n" + errorThrown);
+        console.info(error);
     }); 
 }
 
@@ -105,6 +104,7 @@ function BorrarFoto(){
 function AgregarMascota(){
 	
     var pagina = "./nexoadministrador.php";
+
 	var nombre = $("#nombre").val();
 	var edad = $("#edad").val();
 	var fechaDeNacimiento = $("#fechaDeNacimiento").val();
@@ -118,11 +118,12 @@ function AgregarMascota(){
 	mascota.edad = edad;
 	mascota.fechaDeNacimiento = fechaDeNacimiento;
 	mascota.mascota = mascota;
+	mascota.archivo = archivo;
 
-	if(!Validar(mascota)){
-		alert("Debe completar TODOS los campos!!!");
-		return;
-	}
+	// if(!Validar(mascota)){
+	// 	alert("Debe completar TODOS los campos!!!");
+	// 	return;
+	// }
 	
     $.ajax({
         type: 'POST',
@@ -134,35 +135,37 @@ function AgregarMascota(){
 		},
         async: true
     })
-	.done(function (objJson) {
+	.then(function bien(respuesta) {
 		
-		if(!objJson.Exito){
-			alert(objJson.Mensaje);
-			return;
-		}
+		console.info("BIEN: "+ respuesta+respuesta.Mensaje);
+
+		// if(!objJson.Exito){
+		// 	alert(objJson.Mensaje);
+		// 	return;
+		// }
 		
-		alert(objJson.Mensaje);
+		//alert(objJson.Mensaje);
 		
-		BorrarFoto();
+		//BorrarFoto();
 		
-		$("#codBarra").val("");
-		$("#nombre").val("");
+		//$("#codBarra").val("");
+		//$("#nombre").val("");
 		
-		MostrarGrilla();
+		//MostrarGrilla();
 
 		if(queHago !== "agregar"){
 			$("#hdnQueHago").val("agregar");
 			$("#codBarra").removeAttr("readonly");
 		}
 		
-	})
-	.fail(function (jqXHR, textStatus, errorThrown) {
-        alert(jqXHR.responseText + "\n" + textStatus + "\n" + errorThrown);
+	},
+	function mal (error) {
+        console.info("MAL: "+ error.responseText + error.Mensaje);
     });    
 		
 }
 
-function EliminarProducto(producto){
+function EliminarMascota(producto){
 	
 	if(!confirm("Desea ELIMINAR el PRODUCTO "+producto.nombre+"??")){
 		return;
@@ -197,7 +200,7 @@ function EliminarProducto(producto){
     });    
 	
 }
-function ModificarProducto(objJson){
+function ModificarMascota(objJson){
 
 	$("#codBarra").val(objJson.codBarra);
 	$("#nombre").val(objJson.nombre);
@@ -209,7 +212,7 @@ function ModificarProducto(objJson){
 
 function Validar(objJson){
 
-	alert("implementar validaciones...");
+	//alert("implementar validaciones...");
 	//aplicar validaciones
 	return true;
 }

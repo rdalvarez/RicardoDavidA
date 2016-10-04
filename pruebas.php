@@ -1,12 +1,11 @@
 <?php 
 require_once ("clases/mascota.php");
+require_once ("nexoadministrador.php");
 
 echo "Hola";
 
-$obj = new Mascota("JJJ", 12, "02061992", "gato");
+$res = Mascota::TraerTodasLasMascotas();
 
-$res = Mascota::Guardar($obj);
 
-echo $res;
 
  ?>

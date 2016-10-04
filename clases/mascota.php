@@ -75,7 +75,7 @@ class Mascota
 		$ListaDeMascotasLeidos = array();
 
 		//leo todos los productos del archivo
-		$archivo=fopen("archivos/productos.txt", "r");
+		$archivo=fopen("DB/mascotas.txt", "r");
 		
 		while(!feof($archivo))
 		{
@@ -84,7 +84,7 @@ class Mascota
 			//http://www.w3schools.com/php/func_string_explode.asp
 			$mascotas[0] = trim($mascotas[0]);
 			if($mascotas[0] != ""){
-				$ListaDeMascotasLeidos[] = new Producto($mascotas[0], $mascotas[1],$mascotas[2]);
+				$ListaDeMascotasLeidos[] = new Mascota($mascotas[0], $mascotas[1],$mascotas[2],$mascotas[3],$mascotas[4]);
 			}
 		}
 		fclose($archivo);
